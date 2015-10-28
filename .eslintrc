@@ -1,0 +1,47 @@
+rules:
+  indent:
+    - 2
+    - 2
+  quotes:
+    - 2
+    - single
+  linebreak-style:
+    - 2
+    - unix
+  semi:
+    - 2
+    - always
+env:
+  es6: true
+  node: true
+  browser: true
+extends: 'eslint:recommended'
+ecmaFeatures:
+  arrowFunctions: true
+  classes: true
+  defaultParams: true
+  destructuring: true
+  forOf: true
+  modules: true
+  objectLiteralComputedProperties: true
+  objectLiteralDuplicateProperties: true
+  objectLiteralShorthandMethods: true
+  objectLiteralShorthandProperties: true
+  restParams: true
+  spread: true
+  templateStrings: true
+  jsx: true
+  experimentalObjectRestSpread: true
+
+plugins:
+  - react
+
+parser: babel-eslint
+
+rules:
+  indent: 0
+  strict: 0
+  no-console: 0 # allow console.log()
+  no-constant-condition: 0 # allow while(true)
+  react/jsx-uses-react: 1
+  no-unused-vars: [2, {"vars": "all", "argsIgnorePattern": "^_"}]
