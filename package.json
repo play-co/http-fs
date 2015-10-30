@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "description": "Middleware for mounting a file system over HTTP",
   "author": "Martin Hunt",
+  "browserify": {
+    "transform": [
+       "babelify"
+    ]
+  },
   "dependencies": {
     "bluebird": "^2.10.2",
     "body-parser": "^1.14.1",
