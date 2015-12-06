@@ -132,7 +132,9 @@ function createHandler(fs, handlers, name, opts) {
   switch (name) {
     case 'exists':
       handler = function (basePath, request, response) {
-        fs.exists(verify(basePath, 'path', request.fields.path), function (exists) {
+        // TODO: why is path sent as a file...
+        var path = request.files['path'].toString();
+        fs.exists(verify(basePath, 'path', path), function (exists) {
           response.send({res: exists});
         });
       };
