@@ -87,6 +87,9 @@ export default function remoteFs(mountPoint, opts) {
               value = base64toBlob(data, contentType);
             }
           }
+          else if (param.isObject) {
+            value = JSON.stringify(value);
+          }
 
           data[param.name] = value;
         }

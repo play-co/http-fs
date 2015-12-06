@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var Busboy = require('busboy');
 var constants = process.binding('constants');
+var glob = require('glob');
 
 var METHODS = require('./methods');
 
@@ -136,6 +137,25 @@ function createHandler(fs, handlers, name, opts) {
         var path = request.files['path'].toString();
         fs.exists(verify(basePath, 'path', path), function (exists) {
           response.send({res: exists});
+        });
+      };
+      break;
+    case 'glob':
+      handler = function (basePath, request, response) {
+        var globString = request.files.glob.toString();
+        var globOptions = request.files.options ? JSON.parse(request.files.options.toString()) : null;
+
+        glob(basePath + globString, globOptions, function (err, files) {
+          // Remove the basePath from the beginning of all the file paths
+          var relativePaths = [];
+          files.forEach(function(filePath) {
+            var relativePath = filePath.slice(basePath.length, filePath.length);
+            if (relativePath.indexOf('/') !== 0) {
+              relativePath = '/' + relativePath;
+            }
+            relativePaths.push(relativePath);
+          });
+          response.send({ err: err, res: relativePaths });
         });
       };
       break;

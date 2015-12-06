@@ -201,6 +201,12 @@ module.exports = {
       {"name": "path", "isPath": true},
       {"name": "mode", "optional": true}
     ]
+  },
+  "glob": {
+    "params":[
+      {"name": "glob"},
+      {"name": "options", "optional": true, "isObject": true}
+    ]
   }
 };
 
